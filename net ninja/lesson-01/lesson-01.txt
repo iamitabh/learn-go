@@ -1,0 +1,8 @@
+What is Go?
+
+- Go is a "fast, statically typed, compiled language". Complied means that go code get complied to the
+machine level code that computer understand. Statically typed means that the variable types are defined
+when declaring them. Strongly typed means that variable type can't be changed after declaration.
+- Go is also general purpuse languag (web app, rest api, cloud).
+- Go has built-in testing support
+- Go is an object-oriented language.
