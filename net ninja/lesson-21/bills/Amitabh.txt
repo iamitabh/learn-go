@@ -1,0 +1,5 @@
+Breakdown of bill 
+pie:                      ...$4.33 
+samosa:                   ...$2.99 
+Tip:                      ...$10 
+Total:                    ...$17.32 
