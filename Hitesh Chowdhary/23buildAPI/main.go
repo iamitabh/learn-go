@@ -63,7 +63,6 @@ func getOneCourse(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json.NewEncoder(w).Encode("No Course found with given id")
-	return
 }
 
 func createOneCourse(w http.ResponseWriter, r *http.Response) {
@@ -91,6 +90,46 @@ func createOneCourse(w http.ResponseWriter, r *http.Response) {
 	course.CourseId = strconv.Itoa(rand.Intn(100))
 	courses = append(courses, course)
 	json.NewEncoder(w).Encode(course)
-	return
+	// return
 	// although, json.NewEncoder(w).Encode(course) automatically exist the function so no need to add return statment here.
+}
+
+func updateOneCourse(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Update one course")
+	w.Header().Set("Content-Type", "application/json")
+
+	// first - grab id from req
+	params := mux.Vars(r)
+
+	// loop, id, remove, add with my ID
+	for index, course := range courses {
+		if course.CourseId == params["id"] {
+			courses = append(courses[:index], courses[index+1:]...)
+			var course Course
+			_ = json.NewDecoder(r.Body).Decode(&course)
+			course.CourseId = params["id"]
+			courses = append(courses, course)
+			json.NewEncoder(w).Encode(course)
+			return
+		}
+	}
+
+	// TODO: send a response when id is not found
+
+}
+
+func deleteOneCourse(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Delete one course")
+	w.Header().Set("Content-Type", "application/json")
+
+	params := mux.Vars(r)
+
+	// loop, id, remove
+	for index, course := range courses {
+		if course.CourseId == params["id"] {
+			courses = append(courses[:index], courses[index+1:]...)
+			json.NewEncoder(w).Encode("Course with the given ID has been deleted")
+			break
+		}
+	}
 }
